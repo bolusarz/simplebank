@@ -6,7 +6,6 @@ import (
 	db "github.com/bolusarz/simplebank/db/sqlc"
 	"github.com/bolusarz/simplebank/util"
 	"github.com/gin-gonic/gin"
-	"github.com/lib/pq"
 	"net/http"
 	"time"
 )
@@ -58,13 +57,10 @@ func (server *Server) createUser(ctx *gin.Context) {
 
 	user, err := server.store.CreateUser(ctx, arg)
 	if err != nil {
-		var pqErr *pq.Error
-		if errors.As(err, &pqErr) {
-			switch pqErr.Code.Name() {
-			case "unique_violation":
-				ctx.JSON(http.StatusForbidden, errorResponse(err))
-				return
-			}
+		errCode := db.ErrorCode(err)
+		if errCode == db.UniqueViolation {
+			ctx.JSON(http.StatusForbidden, errorResponse(err))
+			return
 		}
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 	}

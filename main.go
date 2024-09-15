@@ -5,7 +5,7 @@ import (
 	"github.com/bolusarz/simplebank/api"
 	db "github.com/bolusarz/simplebank/db/sqlc"
 	"github.com/bolusarz/simplebank/util"
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5"
 	"log"
 )
 

@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5"
 )
 
 var testQueries *Queries
