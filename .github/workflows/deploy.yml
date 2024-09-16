@@ -25,7 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4 # More information on this action can be found below in the 'AWS Credentials' section
         with:
           audience: sts.amazonaws.com.cn
-          role-to-assume: arn:aws:iam::047719638077:role/GithubRole
+          role-to-assume: arn:aws:iam::047719638077:role/AutoDeployGit
           role-session-name: Github
           aws-region: eu-west-2
 
