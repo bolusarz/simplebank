@@ -1,5 +1,5 @@
 postgres:
-	docker run --name postgres16 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine -p 5432:5432
+	docker run --name postgres16 --network bank-network -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:16-alpine -p 5432:5432
 createdb:
 	docker exec -it postgres16 createdb --username=root --owner=root simple_bank
 dropdb:
@@ -28,5 +28,8 @@ mock:
 
 server:
 	go run main.go
+
+dockerbuild:
+	docker build -t simplebank:latest .
 
 .PHONY: postgres createdb dropdb migrateup migratedown sqlc test migratedown1 migrateup1

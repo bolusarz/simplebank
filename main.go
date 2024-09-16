@@ -1,11 +1,11 @@
 package main
 
 import (
-	"database/sql"
+	"context"
 	"github.com/bolusarz/simplebank/api"
 	db "github.com/bolusarz/simplebank/db/sqlc"
 	"github.com/bolusarz/simplebank/util"
-	_ "github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"log"
 )
 
@@ -15,7 +15,7 @@ func main() {
 		log.Fatal("Cannot load config")
 	}
 
-	conn, err := sql.Open(config.DBDriver, config.DBSource)
+	conn, err := pgxpool.New(context.Background(), config.DBSource)
 
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
