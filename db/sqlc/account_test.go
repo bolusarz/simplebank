@@ -46,7 +46,7 @@ func TestGetAccount(t *testing.T) {
 	require.Equal(t, account.Owner, account2.Owner)
 	require.Equal(t, account.Balance, account2.Balance)
 	require.Equal(t, account.Currency, account2.Currency)
-	require.WithinDuration(t, account.CreatedAt.Time, account2.CreatedAt.Time, time.Second)
+	require.WithinDuration(t, account.CreatedAt, account2.CreatedAt, time.Second)
 }
 
 func TestUpdateAccount(t *testing.T) {
@@ -65,7 +65,7 @@ func TestUpdateAccount(t *testing.T) {
 	require.Equal(t, account.Owner, account2.Owner)
 	require.Equal(t, arg.Balance, account2.Balance)
 	require.Equal(t, account.Currency, account2.Currency)
-	require.WithinDuration(t, account.CreatedAt.Time, account2.CreatedAt.Time, time.Second)
+	require.WithinDuration(t, account.CreatedAt, account2.CreatedAt, time.Second)
 }
 
 func TestDeleteAccount(t *testing.T) {
