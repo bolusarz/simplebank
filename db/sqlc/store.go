@@ -3,13 +3,14 @@ package db
 import (
 	"context"
 	"fmt"
+
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type Store interface {
 	Querier
-	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
+	// TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
 }
 
 type SQLStore struct {
