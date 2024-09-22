@@ -202,6 +202,7 @@ func TestCreateUserApi(t *testing.T) {
 	}
 }
 
+// TODO: Write test for session
 func TestLoginUserApi(t *testing.T) {
 	user, password := randomUser(t)
 
@@ -222,6 +223,10 @@ func TestLoginUserApi(t *testing.T) {
 					Getuser(gomock.Any(), gomock.Eq(user.Username)).
 					Times(1).
 					Return(user, nil)
+
+				store.EXPECT().
+					CreateSession(gomock.Any(), gomock.Any()).
+					Times(1)
 			},
 			checkResponse: func(t *testing.T, recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)

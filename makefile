@@ -32,4 +32,13 @@ server:
 dockerbuild:
 	docker build -t simplebank:latest .
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test migratedown1 migrateup1
+proto:
+	del /f /q pb\*.go
+	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
+        --go-grpc_out=pb --go-grpc_opt=paths=source_relative \
+        proto/*.proto
+
+evans:
+	evans --host localhost --port 9090 -r repl
+
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test proto evans
